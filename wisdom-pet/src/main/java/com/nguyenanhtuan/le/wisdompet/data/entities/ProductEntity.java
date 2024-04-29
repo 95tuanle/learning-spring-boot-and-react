@@ -12,9 +12,9 @@ import java.math.BigDecimal;
 @ToString
 public class ProductEntity {
     @Id
-    @Column(name = "PRODUCT_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "PRODUCT_ID")
+    private long id;
 
     @Column(name = "NAME")
     private String name;
@@ -23,11 +23,7 @@ public class ProductEntity {
     private BigDecimal price;
 
     @Column(name = "VENDOR_ID")
-    private Long vendorId;
-
-    @ManyToOne
-    @JoinColumn(name = "VENDOR_ID", insertable = false, updatable = false)
-    private VendorEntity vendor;
+    private long vendorId;
 
 //    CREATE TABLE PRODUCTS (
 //            PRODUCT_ID BIGINT AUTO_INCREMENT PRIMARY KEY,

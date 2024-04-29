@@ -14,7 +14,7 @@ public class ServiceEntity {
     @Id
     @Column(name = "SERVICE_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @Column(name = "NAME")
     private String name;
