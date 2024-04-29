@@ -1,4 +1,4 @@
-package com.nguyenanhtuanle.lil.wisdompet;
+package com.nguyenanhtuan.le.wisdompet;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

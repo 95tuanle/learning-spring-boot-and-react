@@ -1,4 +1,4 @@
-package com.nguyenanhtuanle.lil.wisdompet.web.models;
+package com.nguyenanhtuan.le.wisdompet.web.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
@@ -14,7 +14,8 @@ import lombok.Setter;
 public class Vendor {
     private Long vendorId;
     private String name;
-    private String email;
-    private String phone;
+    private String contact;
+    private String emailAddress;
+    private String phoneNumber;
     private String address;
 }

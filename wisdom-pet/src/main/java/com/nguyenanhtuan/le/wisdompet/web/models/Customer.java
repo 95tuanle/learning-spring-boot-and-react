@@ -1,4 +1,4 @@
-package com.nguyenanhtuanle.lil.wisdompet.web.models;
+package com.nguyenanhtuan.le.wisdompet.web.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
@@ -12,10 +12,10 @@ import lombok.Setter;
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Customer {
-    private Long customerId;
-    private String firstName;
-    private String lastName;
-    private String email;
-    private String phone;
-    private String address;
+    public Long customerId;
+    public String firstName;
+    public String lastName;
+    public String emailAddress;
+    public String phoneNumber;
+    public String address;
 }

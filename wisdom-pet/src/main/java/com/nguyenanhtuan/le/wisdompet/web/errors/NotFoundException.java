@@ -1,4 +1,4 @@
-package com.nguyenanhtuanle.lil.wisdompet.web.errors;
+package com.nguyenanhtuan.le.wisdompet.web.errors;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

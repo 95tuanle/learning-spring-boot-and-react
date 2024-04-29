@@ -1,4 +1,4 @@
-package com.nguyenanhtuanle.lil.wisdompet.web.models;
+package com.nguyenanhtuan.le.wisdompet.web.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
@@ -15,6 +15,6 @@ import java.math.BigDecimal;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Service {
     private Long serviceId;
+    private BigDecimal price;
     private String name;
-    private String price;
 }

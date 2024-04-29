@@ -1,6 +1,6 @@
-package com.nguyenanhtuanle.lil.wisdompet.data.repositories;
+package com.nguyenanhtuan.le.wisdompet.data.repositories;
 
-import com.nguyenanhtuanle.lil.wisdompet.data.entities.CustomerEntity;
+import com.nguyenanhtuan.le.wisdompet.data.entities.CustomerEntity;
 import org.springframework.data.repository.CrudRepository;
 
 public interface CustomerRepository extends CrudRepository<CustomerEntity, Long> {

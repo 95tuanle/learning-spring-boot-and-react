@@ -1,4 +1,4 @@
-package com.nguyenanhtuanle.lil.wisdompet.data.entities;
+package com.nguyenanhtuan.le.wisdompet.data.entities;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -14,7 +14,7 @@ public class ServiceEntity {
     @Id
     @Column(name = "SERVICE_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long serviceId;
+    private Long id;
 
     @Column(name = "NAME")
     private String name;

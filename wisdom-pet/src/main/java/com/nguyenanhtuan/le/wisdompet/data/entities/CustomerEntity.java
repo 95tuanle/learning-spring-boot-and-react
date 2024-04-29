@@ -1,4 +1,4 @@
-package com.nguyenanhtuanle.lil.wisdompet.data.entities;
+package com.nguyenanhtuan.le.wisdompet.data.entities;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -12,7 +12,7 @@ public class CustomerEntity {
     @Id
     @Column(name = "CUSTOMER_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long customerId;
+    private Long id;
 
     @Column(name = "FIRST_NAME")
     private String firstName;

@@ -1,9 +1,9 @@
-package com.nguyenanhtuanle.lil.wisdompet.services;
+package com.nguyenanhtuan.le.wisdompet.services;
 
-import com.nguyenanhtuanle.lil.wisdompet.data.entities.CustomerEntity;
-import com.nguyenanhtuanle.lil.wisdompet.data.repositories.CustomerRepository;
-import com.nguyenanhtuanle.lil.wisdompet.web.errors.NotFoundException;
-import com.nguyenanhtuanle.lil.wisdompet.web.models.Customer;
+import com.nguyenanhtuan.le.wisdompet.data.entities.CustomerEntity;
+import com.nguyenanhtuan.le.wisdompet.data.repositories.CustomerRepository;
+import com.nguyenanhtuan.le.wisdompet.web.errors.NotFoundException;
+import com.nguyenanhtuan.le.wisdompet.web.models.Customer;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -22,54 +22,49 @@ public class CustomerService {
     public List<Customer> getAllCustomers(String filterEmail) {
         List<Customer> customers = new ArrayList<>();
         if (StringUtils.hasLength(filterEmail)) {
-            CustomerEntity customerEntity = customerRepository.findByEmail(filterEmail);
-            if (customerEntity != null) {
-                customers.add(translateDbToWeb(customerEntity));
-            }
+            CustomerEntity entity = this.customerRepository.findByEmail(filterEmail);
+            customers.add(this.translateDbToWeb(entity));
         } else {
-            Iterable<CustomerEntity> customerEntities = customerRepository.findAll();
-            for (CustomerEntity customerEntity : customerEntities) {
-                customers.add(translateDbToWeb(customerEntity));
-            }
+            Iterable<CustomerEntity> entities = this.customerRepository.findAll();
+            entities.forEach(entity -> {
+                customers.add(this.translateDbToWeb(entity));
+            });
         }
         return customers;
     }
 
-    public Customer getCustomer(long customerId) {
-        Optional<CustomerEntity> customerEntity = customerRepository.findById(customerId);
-        if (customerEntity.isEmpty()) {
-            throw new NotFoundException("Customer not found");
+    public Customer getCustomer(long id) {
+        Optional<CustomerEntity> optional = this.customerRepository.findById(id);
+        if (optional.isEmpty()) {
+            throw new NotFoundException("customer not found with id");
         }
-        return translateDbToWeb(customerEntity.get());
+        return this.translateDbToWeb(optional.get());
+
     }
 
     public Customer createOrUpdate(Customer customer) {
-        CustomerEntity customerEntity = translateWebToDb(customer);
-        customerEntity = customerRepository.save(customerEntity);
-        return translateDbToWeb(customerEntity);
+        CustomerEntity entity = this.translateWebToDb(customer);
+        entity = this.customerRepository.save(entity);
+        return this.translateDbToWeb(entity);
     }
 
-    public void deleteCustomer(long customerId) {
-        customerRepository.deleteById(customerId);
+    public void deleteCustomer(long id) {
+        this.customerRepository.deleteById(id);
     }
 
     private CustomerEntity translateWebToDb(Customer customer) {
-        CustomerEntity customerEntity = new CustomerEntity();
-        customerEntity.setFirstName(customer.getFirstName());
-        customerEntity.setLastName(customer.getLastName());
-        customerEntity.setEmail(customer.getEmail());
-        customerEntity.setPhone(customer.getPhone());
-        customerEntity.setAddress(customer.getAddress());
-        return customerEntity;
+        CustomerEntity entity = new CustomerEntity();
+        entity.setId(customer.getCustomerId());
+        entity.setFirstName(customer.getFirstName());
+        entity.setLastName(customer.getLastName());
+        entity.setEmail(customer.getEmailAddress());
+        entity.setPhone(customer.getPhoneNumber());
+        entity.setAddress(customer.getAddress());
+        return entity;
     }
 
-    private Customer translateDbToWeb(CustomerEntity customerEntity) {
-        Customer customer = new Customer();
-        customer.setFirstName(customerEntity.getFirstName());
-        customer.setLastName(customerEntity.getLastName());
-        customer.setEmail(customerEntity.getEmail());
-        customer.setPhone(customerEntity.getPhone());
-        customer.setAddress(customerEntity.getAddress());
-        return customer;
+    private Customer translateDbToWeb(CustomerEntity entity) {
+        return new Customer(entity.getId(), entity.getFirstName(), entity.getLastName(), entity.getEmail(),
+                entity.getPhone(), entity.getAddress());
     }
 }
