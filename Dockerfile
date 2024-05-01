@@ -1,12 +1,8 @@
 # Start with a base image containing Java runtime
-FROM openjdk:21-jdk-slim as build
+FROM maven as build
 
 # cd into the app directory
 WORKDIR /usr/src/app
-
-# Copy maven executable to the image
-COPY mvnw .
-COPY .mvn .mvn
 
 # Copy the pom.xml file
 COPY pom.xml .
@@ -15,11 +11,11 @@ COPY pom.xml .
 COPY src ./src
 
 # Build the application
-RUN ./mvnw clean package -DskipTests
+RUN mvn clean package -DskipTests
 RUN cp target/wisdom-pet-0.0.1-SNAPSHOT.jar app.jar
 
 # Start with a base image containing Java runtime
-FROM openjdk:21-jdk-slim
+FROM openjdk
 
 WORKDIR /app
 
