@@ -1,5 +1,6 @@
 import {useEffect, useState} from 'react';
 import {getCurrency} from '../Utils';
+import Loading from "./Loading.jsx";
 
 export const Services = () => {
   const [services, setServices] = useState([])
@@ -16,7 +17,7 @@ export const Services = () => {
     getServices().catch(console.error)
   }, [])
 
-  return (<>
+  return services.length === 0 ? <Loading/> : <>
     <h3>Services</h3>
     <table>
       <thead>
@@ -39,7 +40,7 @@ export const Services = () => {
       })}
       </tbody>
     </table>
-  </>)
+  </>
 }
 
 export default Services;

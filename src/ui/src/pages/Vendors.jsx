@@ -1,4 +1,5 @@
 import {useEffect, useState} from 'react';
+import Loading from "./Loading.jsx";
 
 const Vendors = () => {
   const [vendors, setVendors] = useState([])
@@ -15,7 +16,7 @@ const Vendors = () => {
     getVendors().catch(console.error)
   }, [])
 
-  return (<>
+  return vendors.length === 0 ? <Loading/> : <>
     <h3>Vendors</h3>
     <table>
       <thead>
@@ -44,7 +45,7 @@ const Vendors = () => {
       })}
       </tbody>
     </table>
-  </>)
+  </>
 }
 
 export default Vendors;

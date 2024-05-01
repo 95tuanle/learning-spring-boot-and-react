@@ -1,4 +1,5 @@
 import {useEffect, useState} from 'react'
+import Loading from "./Loading.jsx";
 
 const Customers = () => {
   const [customers, setCustomers] = useState([])
@@ -15,7 +16,7 @@ const Customers = () => {
     getCustomers().catch(console.error)
   }, [])
 
-  return (<><h3>Customers</h3>
+  return customers.length === 0 ? <Loading/> : <><h3>Customers</h3>
     <table>
       <thead>
       <tr>
@@ -43,6 +44,6 @@ const Customers = () => {
       })}
       </tbody>
     </table>
-  </>)
+  </>
 }
 export default Customers

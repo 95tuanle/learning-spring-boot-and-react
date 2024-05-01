@@ -1,5 +1,6 @@
 import {useEffect, useState} from 'react';
 import {getCurrency} from '../Utils';
+import Loading from "./Loading.jsx";
 
 const Products = () => {
   const [products, setProducts] = useState([])
@@ -36,7 +37,7 @@ const Products = () => {
     getVendors().catch(console.error)
   }, [])
 
-  return (<>
+  return products.length === 0 ? <Loading/> : <>
     <h3>Products</h3>
     <table>
       <thead>
@@ -52,16 +53,17 @@ const Products = () => {
         const {
           productId, name, price, vendorId
         } = product;
+        const vendor = vendors.get(vendorId);
         return (<tr key={productId}>
           <td>{productId}</td>
           <td>{name}</td>
           <td>{getCurrency(price)}</td>
-          <td>{vendors.get(vendorId).name}</td>
+          <td>{vendor ? vendor.name : 'Vendor not found'}</td>
         </tr>)
       })}
       </tbody>
     </table>
-  </>)
+  </>
 }
 
 export default Products;
