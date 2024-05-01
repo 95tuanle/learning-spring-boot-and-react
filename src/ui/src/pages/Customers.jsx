@@ -1,22 +1,21 @@
-import {useLayoutEffect, useState} from "react";
+import {useEffect, useState} from 'react'
 
 const Customers = () => {
-  const [customers, setCustomers] = useState([]);
+  const [customers, setCustomers] = useState([])
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const getCustomers = async () => {
       const response = await fetch('/api/customers');
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-      const data = await response.json();
-      setCustomers(data);
+      const customers = await response.json();
+      setCustomers(customers);
     }
-    getCustomers().catch(console.error);
-  })
+    getCustomers().catch(console.error)
+  }, [])
 
-  return (<>
-    <h3>Customers</h3>
+  return (<><h3>Customers</h3>
     <table>
       <thead>
       <tr>
@@ -29,17 +28,21 @@ const Customers = () => {
       </tr>
       </thead>
       <tbody>
-      {customers.map(customer => (<tr key={customer.customerId}>
-        <td>{customer.customerId}</td>
-        <td>{customer.firstName}</td>
-        <td>{customer.lastName}</td>
-        <td>{customer.emailAddress}</td>
-        <td>{customer.phoneNumber}</td>
-        <td>{customer.address}</td>
-      </tr>))}
+      {customers.map(customer => {
+        const {
+          customerId, firstName, lastName, emailAddress, phoneNumber, address
+        } = customer;
+        return (<tr key={customerId}>
+          <td>{customerId}</td>
+          <td>{firstName}</td>
+          <td>{lastName}</td>
+          <td>{emailAddress}</td>
+          <td>{phoneNumber}</td>
+          <td>{address}</td>
+        </tr>)
+      })}
       </tbody>
     </table>
-  </>);
+  </>)
 }
-
-export default Customers;
+export default Customers
