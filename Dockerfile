@@ -1,5 +1,5 @@
 # Start with a base image containing Java runtime
-FROM maven as build
+FROM maven:3.9.6 as build
 
 # cd into the app directory
 WORKDIR /usr/src/app
@@ -15,7 +15,7 @@ RUN mvn clean package -DskipTests
 RUN cp target/wisdom-pet-0.0.1-SNAPSHOT.jar app.jar
 
 # Start with a base image containing Java runtime
-FROM openjdk
+FROM openjdk:22
 
 WORKDIR /app
 
